@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mission index{% endblock %}
+
+{% block body %}
+    <h1>Mission index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Description</th>
+                <th>Difficulte</th>
+                <th>Datefin</th>
+                <th>Etat</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for mission in missions %}
+            <tr>
+                <td>{{ mission.id }}</td>
+                <td>{{ mission.nom }}</td>
+                <td>{{ mission.description }}</td>
+                <td>{{ mission.difficulte }}</td>
+                <td>{{ mission.datefin ? mission.datefin|date('Y-m-d') : '' }}</td>
+                <td>{{ (mission.etat==0?"Disponible":(mission.etat==1?"En cours":"Finie")) }} </td>
+                <td>
+                    <a href="{{ path('mission_show', {'id': mission.id}) }}">show</a>
+                    <a href="{{ path('mission_edit', {'id': mission.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('mission_new') }}">Create new</a>
+{% endblock %}

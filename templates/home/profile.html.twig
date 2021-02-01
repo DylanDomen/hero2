@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil{% endblock %}
+
+{% block body %}
+{%for user in userInfo %}
+    <h1> Profil de : {{app.user.username}}</h1>
+
+    <h2>Liste des héros engagés :</h2>
+    <table>
+        <tr>
+            <th>Nom</th>
+            <th>Pouvoirs</th>
+        </tr>
+        {% for heros in app.user.heroes %} 
+        <tr><td>{{heros.nom}}</td> <td>{{heros.pouvoirs}}</td></tr>
+        {% endfor %}   
+    </table>
+    
+     
+{% endfor %}
+
+
+{% endblock %}
